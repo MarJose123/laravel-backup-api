@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use MarJose123\LaravelBackupApi\Jobs\CreateBackupJob;
 use MarJose123\LaravelBackupApi\Models\BackupDestination;
 use MarJose123\LaravelBackupApi\Models\BackupDestinationStatus;
+use Symfony\Component\HttpFoundation\Response;
 
 class BackupApiController
 {
@@ -26,7 +27,13 @@ class BackupApiController
             ->onQueue(config('backup-api.queue'))
             ->afterResponse();
 
-        return $this->respondOk('Creating a new backup in background. Check the list Backup to get the recent backup');
+        return  response()->json([
+            'status' => 'success',
+            'status_code' => Response::HTTP_OK ,
+            'record_count' => null,
+            'message' => 'Creating a new backup in background. Check the list Backup to get the recent backup',
+            'data' => null
+        ], Response::HTTP_OK );
 
     }
 
@@ -36,8 +43,21 @@ class BackupApiController
         * Check Authenticated User Permissions
         */
         $this->verifyPermission();
+        if(BackupDestination::query()->get()->count() < 0) return response()->json([
+            'status' => 'success',
+            'status_code' => Response::HTTP_NO_CONTENT ,
+            'record_count' => BackupDestination::query()->get()->count(),
+            'message' => 'No available data',
+            'data' => null
+        ], Response::HTTP_NO_CONTENT );
 
-        return $this->respondWithSuccess(BackupDestination::query()->get());
+        return  response()->json([
+            'status' => 'success',
+            'status_code' => Response::HTTP_OK ,
+            'record_count' => BackupDestination::query()->get()->count(),
+            'message' => '',
+            'data' => BackupDestination::query()->get()
+        ], Response::HTTP_OK );
 
     }
 
@@ -48,7 +68,13 @@ class BackupApiController
         */
         $this->verifyPermission();
 
-        return $this->respondWithSuccess(BackupDestinationStatus::query()->get());
+        return  response()->json([
+            'status' => 'success',
+            'status_code' => Response::HTTP_OK ,
+            'record_count' => BackupDestinationStatus::query()->get()->count(),
+            'message' => '',
+            'data' => BackupDestinationStatus::query()->get()
+        ], Response::HTTP_OK );
 
     }
 

@@ -3,6 +3,7 @@
 namespace MarJose123\LaravelBackupApi\Http\Controllers;
 
 use F9Web\ApiResponseHelpers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use MarJose123\LaravelBackupApi\Jobs\CreateBackupJob;
 use MarJose123\LaravelBackupApi\Models\BackupDestination;
@@ -78,14 +79,23 @@ class BackupApiController
 
     }
 
-    public function download(BackupDestination $record)
+    public function download(Request $request, string $id)
     {
         /*
         * Check Authenticated User Permissions
         */
         $this->verifyPermission();
 
-        return Storage::disk($record->disk)->download($record->path);
+        $record = BackupDestination::query()->where('id', $id)->get();
+        if($record) return Storage::disk($record->disk)->download($record->path);
+
+        return response()->json([
+            'status' => 'success',
+            'status_code' => Response::HTTP_NO_CONTENT ,
+            'record_count' => 0,
+            'message' => 'No available data',
+            'data' => null
+        ], Response::HTTP_NO_CONTENT );
 
     }
 

@@ -5,7 +5,6 @@ namespace MarJose123\LaravelBackupApi\Http\Controllers;
 use F9Web\ApiResponseHelpers;
 use Illuminate\Http\Request;
 use MarJose123\LaravelBackupApi\Jobs\CreateBackupJob;
-use Spatie\Backup\Tasks\Backup\BackupJobFactory;
 
 class BackupApiController
 {

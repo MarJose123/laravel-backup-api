@@ -4,14 +4,13 @@ namespace MarJose123\LaravelBackupApi;
 
 use Illuminate\Support\Facades\Cache;
 use Spatie\Backup\BackupDestination\Backup;
-use Spatie\Backup\Helpers\Format;
 use Spatie\Backup\BackupDestination\BackupDestination;
+use Spatie\Backup\Helpers\Format;
 use Spatie\Backup\Tasks\Monitor\BackupDestinationStatus;
 use Spatie\Backup\Tasks\Monitor\BackupDestinationStatusFactory;
 
 class LaravelBackupApi
 {
-
     public static function getDisks(): array
     {
         return config('backup.backup.destination.disks');
@@ -26,7 +25,7 @@ class LaravelBackupApi
 
     public static function getBackupDestinationData(string $disk): array
     {
-        return Cache::remember('backups-'. $disk, now()->addSeconds(4), function () use ($disk) {
+        return Cache::remember('backups-'.$disk, now()->addSeconds(4), function () use ($disk) {
             return BackupDestination::create($disk, config('backup.backup.name'))
                 ->backups()
                 ->map(function (Backup $backup) use ($disk) {
@@ -42,11 +41,12 @@ class LaravelBackupApi
                 ->toArray();
         });
     }
+
     public static function getBackupDestinationStatusData(): array
     {
         return Cache::remember('backup-statuses', now()->addSeconds(4), function () {
             return BackupDestinationStatusFactory::createForMonitorConfig(config('backup.monitor_backups'))
-                ->map(function (BackupDestinationStatus $backupDestinationStatus, int | string $key) {
+                ->map(function (BackupDestinationStatus $backupDestinationStatus, int|string $key) {
                     return [
                         'id' => $key,
                         'name' => $backupDestinationStatus->backupDestination()->backupName(),

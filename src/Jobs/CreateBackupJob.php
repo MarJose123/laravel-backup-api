@@ -17,17 +17,25 @@ class CreateBackupJob implements ShouldQueue
 
     public function __construct()
     {
-         $this->option = config('backup-api.options');
+        $this->option = config('backup-api.options');
     }
 
     public function handle(): void
     {
         $backupJob = BackupJobFactory::createFromArray(config('backup'));
 
-        if($this->option === 'db') $backupJob->dontBackupFilesystem();
-        if($this->option === 'system') $backupJob->dontBackupDatabases();
-        if(config('backup-api.disable_notification')) $backupJob->disableNotifications();
-        if(config('backup-api.disable_signal')) $backupJob->disableSignals();
+        if ($this->option === 'db') {
+            $backupJob->dontBackupFilesystem();
+        }
+        if ($this->option === 'system') {
+            $backupJob->dontBackupDatabases();
+        }
+        if (config('backup-api.disable_notification')) {
+            $backupJob->disableNotifications();
+        }
+        if (config('backup-api.disable_signal')) {
+            $backupJob->disableSignals();
+        }
 
         $backupJob->setFilename($this->option.'-'.date('Y-m-d-H-i-s').'.zip');
 

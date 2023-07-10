@@ -70,5 +70,4 @@ return [
      */
     'queue' => null,
 
-
 ];

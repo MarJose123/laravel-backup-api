@@ -32,7 +32,7 @@ return [
     'permissions' => [
         'download' => [],
         'create_backup' => [],
-        'backup_list' => []
+        'backup_list' => [],
     ],
 
 ];

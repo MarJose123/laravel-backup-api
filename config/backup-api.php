@@ -19,5 +19,9 @@ return [
      *  Link: https://laravel.com/docs/10.x/routing#route-group-prefixes
      */
     'route_prefix' => 'backup',
+    /*
+     *  Controller Permission
+     */
+    'permission' => [],
 
 ];

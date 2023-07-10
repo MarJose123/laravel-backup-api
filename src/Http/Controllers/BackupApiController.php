@@ -14,16 +14,13 @@ class BackupApiController
         /*
          *  Check Authenticated User Permissions
          */
-        if(!is_null(config('backup-api.permissions.create_backup')) && $request->user()->cannot(config('backup-api.permissions.create_backup')))
-        {
+        if (! is_null(config('backup-api.permissions.create_backup')) && $request->user()->cannot(config('backup-api.permissions.create_backup'))) {
             return $this->respondForbidden('You don\'t have a permission to create system/database backup.');
         }
 
         /*
          *  Process the request to create a backup
          */
-
-
 
     }
 }

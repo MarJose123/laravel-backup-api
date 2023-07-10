@@ -33,7 +33,7 @@ return [
     'permissions' => [
         'download' => null,
         'create_backup' => null,
-        'backup_list' => null
+        'backup_list' => null,
     ],
 
 ];

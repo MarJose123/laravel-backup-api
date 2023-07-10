@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 use MarJose123\LaravelBackupApi\LaravelBackupApi;
 use Sushi\Sushi;
 
-
 class BackupDestinationStatus extends Model
 {
     use Sushi;
@@ -15,5 +14,4 @@ class BackupDestinationStatus extends Model
     {
         return LaravelBackupApi::getBackupDestinationStatusData();
     }
-
 }

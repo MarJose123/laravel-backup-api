@@ -1,16 +1,17 @@
 <?php
-use \Illuminate\Support\Facades\Route;
-use \MarJose123\LaravelBackupApi\Http\Controllers\BackupApiController;
+
+use Illuminate\Support\Facades\Route;
+use MarJose123\LaravelBackupApi\Http\Controllers\BackupApiController;
 
 Route::middleware(config('backup-api.middleware'))
     ->prefix(config('backup-api.route_prefix'))
     ->name(config('backup-api.route_name_prefix'))
-    ->group(function (){
+    ->group(function () {
         /*
          * Creating a back-up
          */
         Route::post('/create', [BackupApiController::class, 'createBackup'])
-                ->name('create-backup');
+            ->name('create-backup');
         /*
          * Retrieve Back-up Disk Destination information
          */
@@ -27,4 +28,4 @@ Route::middleware(config('backup-api.middleware'))
         Route::get('/download/{id}', [BackupApiController::class, 'download'])
             ->name('download');
 
-});
+    });

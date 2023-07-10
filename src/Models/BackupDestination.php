@@ -20,5 +20,4 @@ class BackupDestination extends Model
 
         return $data;
     }
-
 }

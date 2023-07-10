@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace MarJose123\LaravelBackupApi\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class LaravelBackupApiCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'laravel-backup-api';
 
     public $description = 'My command';
 

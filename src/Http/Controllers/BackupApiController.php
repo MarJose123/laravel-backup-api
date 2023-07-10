@@ -4,6 +4,8 @@ namespace MarJose123\LaravelBackupApi\Http\Controllers;
 
 use F9Web\ApiResponseHelpers;
 use Illuminate\Http\Request;
+use MarJose123\LaravelBackupApi\Jobs\CreateBackupJob;
+use Spatie\Backup\Tasks\Backup\BackupJobFactory;
 
 class BackupApiController
 {
@@ -21,6 +23,11 @@ class BackupApiController
         /*
          *  Process the request to create a backup
          */
+        dispatch(new CreateBackupJob())
+            ->onQueue(config('backup-api.queue'))
+            ->afterResponse();
+
+        return $this->respondOk('Creating a new backup in background. Check the list Backup to get the recent backup');
 
     }
 }

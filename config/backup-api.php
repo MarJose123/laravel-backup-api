@@ -21,7 +21,18 @@ return [
     'route_prefix' => 'backup',
     /*
      *  Controller Permission
+     *
+     *  This permission set will be used for checking the authorized user if the user have an ability
+     *  to create backup, download backup, or view any backup
+     *
+     *  If the Permission set is blank, any authorized request will be granted for the action.
+     *  -------
+     *  You need to put permission needed by the user.
      */
-    'permission' => [],
+    'permissions' => [
+        'download' => [],
+        'create_backup' => [],
+        'backup_list' => []
+    ],
 
 ];

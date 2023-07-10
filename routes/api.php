@@ -15,7 +15,7 @@ Route::middleware(config('backup-api.middleware'))
         /*
          * Retrieve Back-up Disk Destination information
          */
-        Route::get('/backup/disks', [BackupApiController::class, 'diskIndex'])
+        Route::get('/disks', [BackupApiController::class, 'diskIndex'])
             ->name('disks.index');
         /*
          * Retrieve Back-up information

@@ -13,7 +13,7 @@ class CreateBackupJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected string $option;
+    protected string|null $option;
 
     public function __construct()
     {
@@ -24,10 +24,10 @@ class CreateBackupJob implements ShouldQueue
     {
         $backupJob = BackupJobFactory::createFromArray(config('backup'));
 
-        if ($this->option === 'db') {
+        if (!$this->option === null && $this->option === 'db') {
             $backupJob->dontBackupFilesystem();
         }
-        if ($this->option === 'system') {
+        if (!$this->option === null && $this->option === 'system') {
             $backupJob->dontBackupDatabases();
         }
         if (config('backup-api.disable_notification')) {
@@ -37,7 +37,7 @@ class CreateBackupJob implements ShouldQueue
             $backupJob->disableSignals();
         }
 
-        $backupJob->setFilename($this->option.'-'.date('Y-m-d-H-i-s').'.zip');
+        $backupJob->setFilename(config('backup-api.filename').'-'.date('Y-m-d-H-i-s').'.zip');
 
         $backupJob->run();
 

@@ -3,8 +3,8 @@
 namespace MarJose123\LaravelBackupApi\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Orchestra\Testbench\TestCase as Orchestra;
 use MarJose123\LaravelBackupApi\LaravelBackupApiServiceProvider;
+use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
 {

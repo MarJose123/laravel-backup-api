@@ -2,9 +2,9 @@
 
 namespace MarJose123\LaravelBackupApi;
 
+use MarJose123\LaravelBackupApi\Commands\LaravelBackupApiCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use MarJose123\LaravelBackupApi\Commands\LaravelBackupApiCommand;
 
 class LaravelBackupApiServiceProvider extends PackageServiceProvider
 {
@@ -19,7 +19,7 @@ class LaravelBackupApiServiceProvider extends PackageServiceProvider
             ->name('laravel-backup-api')
             ->hasConfigFile()
             ->hasRoute('api');
-//            ->hasMigration('create_laravel-backup-api_table')
-//            ->hasCommand(LaravelBackupApiCommand::class);
+        //            ->hasMigration('create_laravel-backup-api_table')
+        //            ->hasCommand(LaravelBackupApiCommand::class);
     }
 }

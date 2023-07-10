@@ -1,4 +1,5 @@
 <?php
+
 return [
 
     /*
@@ -6,7 +7,7 @@ return [
      *  Link: https://laravel.com/docs/10.x/routing#route-group-middleware
      */
     'middleware' => [
-        'auth:sanctum'
+        'auth:sanctum',
     ],
     /*
      *  Route Name Prefixes
@@ -18,6 +19,5 @@ return [
      *  Link: https://laravel.com/docs/10.x/routing#route-group-prefixes
      */
     'route_prefix' => 'backup',
-
 
 ];

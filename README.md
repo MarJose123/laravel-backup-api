@@ -28,25 +28,20 @@ You can publish the config file with:
 php artisan vendor:publish --tag="laravel-backup-api-config"
 ```
 
-This is the contents of the published config file:
+## API Routes
 
-```php
-return [
-];
-```
-
-Optionally, you can publish the views using
-
-```bash
-php artisan vendor:publish --tag="laravel-backup-api-views"
-```
-
-## Usage
-
-```php
-$laravelBackupApi = new MarJose123\LaravelBackupApi();
-echo $laravelBackupApi->echoPhrase('Hello, MarJose123!');
-```
+1. **Create Backup**
+   1. Method: POST
+   2. URI: http://{domain}/backup/create
+2. **List of Backup**
+   1. Method: GET
+   2. URI: http://{domain}/backup
+3. **List of Backup Disk**
+   1. Method: GET
+   2. URI: http://{domain}/backup/disks
+4. **Download Backup**
+    1. Method: GET
+    2. URI: http://{domain}/backup/download/{id}
 
 ## Testing
 

@@ -26,6 +26,8 @@ class CreateBackupJob implements ShouldQueue
 
         if($this->option === 'db') $backupJob->dontBackupFilesystem();
         if($this->option === 'system') $backupJob->dontBackupDatabases();
+        if(config('backup-api.disable_notification')) $backupJob->disableNotifications();
+        if(config('backup-api.disable_signal')) $backupJob->disableSignals();
 
         $backupJob->setFilename($this->option.'-'.date('Y-m-d-H-i-s').'.zip');
 

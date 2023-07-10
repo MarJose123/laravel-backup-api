@@ -20,7 +20,7 @@ Route::middleware(config('backup-api.middleware'))
         /*
          * Retrieve Back-up information
          */
-        Route::get('/backup', [BackupApiController::class, 'backupIndex'])
+        Route::get('/', [BackupApiController::class, 'backupIndex'])
             ->name('index');
         /*
          * Download the backup data

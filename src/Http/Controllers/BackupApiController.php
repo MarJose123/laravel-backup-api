@@ -15,12 +15,12 @@ class BackupApiController
     public function createBackup()
     {
         /*
-         *  Check Authenticated User Permissions
+         * Check Authenticated User Permissions
          */
         $this->verifyPermission();
 
         /*
-         *  Process the request to create a backup
+         * Process the request to create a backup
          */
         dispatch(new CreateBackupJob())
             ->onQueue(config('backup-api.queue'))

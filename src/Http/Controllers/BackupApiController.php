@@ -2,8 +2,8 @@
 
 namespace MarJose123\LaravelBackupApi\Http\Controllers;
 
-use F9Web\ApiResponseHelpers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use MarJose123\LaravelBackupApi\Jobs\CreateBackupJob;
 use MarJose123\LaravelBackupApi\Models\BackupDestination;
@@ -12,14 +12,18 @@ use Symfony\Component\HttpFoundation\Response;
 
 class BackupApiController
 {
-    use ApiResponseHelpers;
-
     public function createBackup()
     {
         /*
          * Check Authenticated User Permissions
          */
-        $this->verifyPermission();
+        if (! Auth::user()->can(config('backup-api.permissions.create_backup'))) {
+            return response()->json([
+                'status' => 'failed',
+                'status_code' => Response::HTTP_FORBIDDEN,
+                'message' => 'You don\'t have a permission to create system/database backup.',
+            ], Response::HTTP_FORBIDDEN);
+        }
 
         /*
          * Process the request to create a backup
@@ -43,7 +47,14 @@ class BackupApiController
         /*
         * Check Authenticated User Permissions
         */
-        $this->verifyPermission();
+        if (! Auth::user()->can(config('backup-api.permissions.backup_list'))) {
+            return response()->json([
+                'status' => 'failed',
+                'status_code' => Response::HTTP_FORBIDDEN,
+                'message' => 'You don\'t have a permission to view any system/database backup.',
+            ], Response::HTTP_FORBIDDEN);
+        }
+
         if (BackupDestination::query()->get()->count() < 0) {
             return response()->json([
                 'status' => 'success',
@@ -66,11 +77,6 @@ class BackupApiController
 
     public function diskIndex()
     {
-        /*
-        * Check Authenticated User Permissions
-        */
-        $this->verifyPermission();
-
         return response()->json([
             'status' => 'success',
             'status_code' => Response::HTTP_OK,
@@ -86,7 +92,13 @@ class BackupApiController
         /*
         * Check Authenticated User Permissions
         */
-        $this->verifyPermission();
+        if (! Auth::user()->can(config('backup-api.permissions.backup_list'))) {
+            return response()->json([
+                'status' => 'failed',
+                'status_code' => Response::HTTP_FORBIDDEN,
+                'message' => 'You don\'t have a permission to download system/database backup.',
+            ], Response::HTTP_FORBIDDEN);
+        }
 
         $record = BackupDestination::query()->where('id', $id)->first();
         if ($record) {
@@ -101,12 +113,5 @@ class BackupApiController
             'data' => null,
         ], Response::HTTP_NO_CONTENT);
 
-    }
-
-    private function verifyPermission()
-    {
-        if (! is_null(config('backup-api.permissions.create_backup')) && auth()->user()->cannot(config('backup-api.permissions.create_backup'))) {
-            return $this->respondForbidden('You don\'t have a permission to create system/database backup.');
-        }
     }
 }

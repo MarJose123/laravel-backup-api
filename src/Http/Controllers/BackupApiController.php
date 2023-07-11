@@ -86,14 +86,14 @@ class BackupApiController
         */
         $this->verifyPermission();
 
-        $record = BackupDestination::query()->where('id', $id)->get();
+        $record = BackupDestination::query()->where('id', $id)->first();
         if($record) return Storage::disk($record->disk)->download($record->path);
 
         return response()->json([
             'status' => 'success',
             'status_code' => Response::HTTP_NO_CONTENT ,
             'record_count' => 0,
-            'message' => 'No available data',
+            'message' => 'Invalid backup ID.',
             'data' => null
         ], Response::HTTP_NO_CONTENT );
 

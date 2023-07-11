@@ -1,5 +1,3 @@
-:construction: This plugin is undergoing development and not yet ready for production :construction:
-
 # A package to backup your Laravel app via API
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/marjose123/laravel-backup-api.svg?style=flat-square)](https://packagist.org/packages/marjose123/laravel-backup-api)

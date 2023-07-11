@@ -24,10 +24,10 @@ class CreateBackupJob implements ShouldQueue
     {
         $backupJob = BackupJobFactory::createFromArray(config('backup'));
 
-        if (!$this->option === null && $this->option === 'db') {
+        if (! $this->option === null && $this->option === 'db') {
             $backupJob->dontBackupFilesystem();
         }
-        if (!$this->option === null && $this->option === 'system') {
+        if (! $this->option === null && $this->option === 'system') {
             $backupJob->dontBackupDatabases();
         }
         if (config('backup-api.disable_notification')) {

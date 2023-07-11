@@ -92,7 +92,7 @@ class BackupApiController
         /*
         * Check Authenticated User Permissions
         */
-        if (! Auth::user()->can(config('backup-api.permissions.backup_list'))) {
+        if (! Auth::user()->can(config('backup-api.permissions.download'))) {
             return response()->json([
                 'status' => 'failed',
                 'status_code' => Response::HTTP_FORBIDDEN,

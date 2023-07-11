@@ -15,17 +15,10 @@ You can install the package via composer:
 composer require marjose123/laravel-backup-api
 ```
 
-You can publish and run the migrations with:
-
-```bash
-php artisan vendor:publish --tag="laravel-backup-api-migrations"
-php artisan migrate
-```
-
 You can publish the config file with:
 
 ```bash
-php artisan vendor:publish --tag="laravel-backup-api-config"
+php artisan vendor:publish --tag="backup-api-config"
 ```
 
 ## API Routes

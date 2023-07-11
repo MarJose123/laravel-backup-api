@@ -20,21 +20,23 @@ You can publish the config file with:
 ```bash
 php artisan vendor:publish --tag="backup-api-config"
 ```
+and configure to add permissions, route_prefix, and other settings.
+
 
 ## API Routes
 
 1. **Create Backup**
    1. Method: POST
-   2. URI: http://{domain}/backup/create
+   2. URI: http://{domain}/{route_prefix}/create
 2. **List of Backup**
    1. Method: GET
-   2. URI: http://{domain}/backup
+   2. URI: http://{domain}/{route_prefix}
 3. **List of Backup Disk**
    1. Method: GET
-   2. URI: http://{domain}/backup/disks
+   2. URI: http://{domain}/{route_prefix}/disks
 4. **Download Backup**
     1. Method: GET
-    2. URI: http://{domain}/backup/download/{id}
+    2. URI: http://{domain}/{route_prefix}/download/{id}
 
 ## Testing
 
